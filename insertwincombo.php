@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('./database.php');
+require_once('database.php');
 
 $db = new database;
 
@@ -23,7 +23,9 @@ if(isset($_POST['combo']) && count($_POST['combo']) > 0)
 }
 else
 {
-    $reply['message'] = 'You have to check at least on filed';
+    
+    $reply['message'] = 'You have to check at least one field';
+
 }
 
 echo json_encode($reply);

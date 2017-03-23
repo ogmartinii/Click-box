@@ -1,10 +1,14 @@
 <?php
 session_start();
-require_once './database.php';
+require_once('database.php');
 
 $db = new database;
 
-if(isset($_POST))
+$reply = [
+    'status' => 'ERROR',
+];
+
+if(isset($_POST['combo']) && count($_POST['combo']) > 0)
 {
     
     $attempt_array = $_POST['combo'];
@@ -21,18 +25,30 @@ if(isset($_POST))
 
     $win_array = explode(',', $win_string['win_combo']);
 
+
     if(!array_diff($attempt_array, $win_array) && !array_diff($win_array, $attempt_array)) 
     {
     
-        echo 'SOLVED';
+        $reply['staus'] = 'solved';
+
+        $reply['message'] = 'SOLVED';
     
     }
     else
     {
 
-        echo 'WRONG COMBO';
+        $reply['status'] = 'wrong';
+        
+        $reply['message'] = 'WRONG COMBO';
         
     }
 
+}
+else
+{
+    
+    $reply['message'] = 'You have to check at least one field';
 
 }
+
+echo json_encode($reply);
