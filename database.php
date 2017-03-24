@@ -10,13 +10,6 @@ class database
         $this->db = new PDO('mysql:host=localhost;dbname=wdf;charset=utf8', 'root', '');
     }
 
-    public function insertUser()
-    {
-        $stmt = $this->db->prepare('INSERT INTO user (id) VALUES (NULL)');
-        $stmt->execute([]);
-        return $this->db->lastInsertId();
-    }
-
     public function insertWinCombo($win_combo)
     {
         $stmt = $this->db->prepare('INSERT INTO win_combo (win_combo) VALUES (?)');
